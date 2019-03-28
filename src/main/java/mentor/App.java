@@ -23,8 +23,9 @@ public class App {
         try {
             messageContents = importLastMessage(mailBox, needleSubject);
         } catch (RuntimeException e) {
-            System.out.println("There is no such messages :(");
-            System.exit(0);
+            throw new RuntimeException(e);
+            // System.out.println("There is no such messages :(");
+            // System.exit(0);
         }
 
         if (messageContents.length() > 0) {
@@ -61,8 +62,11 @@ public class App {
         try {
             selected = mailBox.selectMessagesBySubject(messages, needleSubject);
         } catch (RuntimeException e) {
+            System.out.println("ex");
             throw new RuntimeException(e);
         }
+
+        System.out.println(selected.length);
 
         Message needle = mailBox.getLatestMessage(selected);
 

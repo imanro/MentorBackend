@@ -21,9 +21,13 @@ public class MailBox {
 
         Stream<Message> s = Arrays.stream(messages).filter(m -> {
             try {
+                // System.out.println(m.getSubject());
+                // System.out.println(m.getSubject().contains(subject));
+
                 return m.getSubject().contains(subject);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
+            } catch (MessagingException | NullPointerException e) {
+                return false;
+                // throw new RuntimeException(e);
             }
         });
 
