@@ -14,8 +14,8 @@ class ExpressionRepositoryTest {
     @BeforeAll
     public static void init() {
         repository = new ExpressionRepository();
-        repository.initDatabase("mentorTest");
         repository.initClient();
+        repository.initDatabase("mentorTest");
     }
 
     @Test

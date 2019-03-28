@@ -40,7 +40,7 @@ dependencies {
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.0')
 }
 
-mainClassName = 'mentor.App'
+// mainClassName = 'mentor.App'
 
 test {
     useJUnitPlatform()
@@ -49,3 +49,16 @@ test {
 	showStandardStreams = true
     }
 }
+
+task(runSimple, dependsOn: 'classes', type: JavaExec) {
+    main = 'mentor.App'
+    classpath = sourceSets.main.runtimeClasspath
+//    args 'mrhaki'
+//    systemProperty 'simple.message', 'Hello '
+}
+
+/*
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+*/

@@ -15,11 +15,19 @@ public class App {
 
         String needleSubject = "Your Reverso Phrasebook export";
 
-        System.out.println("Hello!");
+        System.out.println("Hello, I'm Mentor importer!");
         MailBox mailBox = getMailBox();
-        String messageContents = importLastMessage(mailBox, needleSubject);
 
-        if (messageContents != null) {
+        String messageContents = "";
+
+        try {
+            messageContents = importLastMessage(mailBox, needleSubject);
+        } catch (RuntimeException e) {
+            System.out.println("There is no such messages :(");
+            System.exit(0);
+        }
+
+        if (messageContents.length() > 0) {
             MessageParser parser = getMessageParser();
             List<String> lines = parser.extractLines(messageContents);
             System.out.println("We have found " + lines.size() + " of lines");
@@ -48,7 +56,13 @@ public class App {
             throw new RuntimeException(e);
         }
 
-        Message[] selected = mailBox.selectMessagesBySubject(messages, needleSubject);
+        Message[] selected;
+
+        try {
+            selected = mailBox.selectMessagesBySubject(messages, needleSubject);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
 
         Message needle = mailBox.getLatestMessage(selected);
 
