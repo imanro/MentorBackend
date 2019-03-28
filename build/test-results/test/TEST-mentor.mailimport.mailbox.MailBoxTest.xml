@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mentor.mailimport.mailbox.MailBoxTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2019-03-23T10:24:36" hostname="Romans-MacBook-Pro.local" time="0.075">
+  <properties/>
+  <testcase name="isMessageContentsReturned()" classname="mentor.mailimport.mailbox.MailBoxTest" time="0.053"/>
+  <testcase name="lastNeedleMessageChoosen()" classname="mentor.mailimport.mailbox.MailBoxTest" time="0.009"/>
+  <testcase name="needleMessagesSelected()" classname="mentor.mailimport.mailbox.MailBoxTest" time="0.009"/>
+  <testcase name="messagesListReceived()" classname="mentor.mailimport.mailbox.MailBoxTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

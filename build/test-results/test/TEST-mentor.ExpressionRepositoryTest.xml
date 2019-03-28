@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mentor.ExpressionRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-03-23T10:24:36" hostname="Romans-MacBook-Pro.local" time="0.34">
+  <properties/>
+  <testcase name="objectSaved()" classname="mentor.ExpressionRepositoryTest" time="0.34"/>
+  <system-out><![CDATA[12:24:36.328 [Test worker] INFO org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+12:24:36.362 [Test worker] DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING}]
+12:24:36.385 [Test worker] INFO org.mongodb.driver.cluster - Cluster description not yet available. Waiting for 30000 ms before timing out
+12:24:36.452 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] INFO org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:1}] to localhost:27017
+12:24:36.452 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] DEBUG org.mongodb.driver.cluster - Checking status of localhost:27017
+12:24:36.470 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] DEBUG org.mongodb.driver.protocol.command - Sending command '{"ismaster": 1, "$db": "admin"}' with request id 4 to database admin on connection [connectionId{localValue:1, serverValue:1}] to server localhost:27017
+12:24:36.472 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] DEBUG org.mongodb.driver.protocol.command - Execution of command with request id 4 completed successfully in 16.41 ms on connection [connectionId{localValue:1, serverValue:1}] to server localhost:27017
+12:24:36.474 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] INFO org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 3]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=20309485}
+12:24:36.475 [cluster-ClusterId{value='5c96096483d40f377fd90b16', description='null'}-localhost:27017] DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=STANDALONE, servers=[{address=localhost:27017, type=STANDALONE, roundTripTime=20.3 ms, state=CONNECTED}]
+12:24:36.485 [Test worker] INFO org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:2}] to localhost:27017
+12:24:36.492 [Test worker] DEBUG org.mongodb.driver.protocol.command - Sending command '{"drop": "expression", "$db": "mentor", "$readPreference": {"mode": "primaryPreferred"}}' with request id 8 to database mentor on connection [connectionId{localValue:2, serverValue:2}] to server localhost:27017
+12:24:36.540 [Test worker] DEBUG org.mongodb.driver.protocol.command - Execution of command with request id 8 completed successfully in 48.23 ms on connection [connectionId{localValue:2, serverValue:2}] to server localhost:27017
+12:24:36.590 [Test worker] DEBUG org.mongodb.driver.protocol.command - Sending command '{"insert": "expression", "ordered": true, "$db": "mentor", "documents": [{"_id": "C89C59FA7056A890F60F8E6DF5159B95", "hash": "C89C59FA7056A890F60F8E6DF5159B95", "term": "a", "example": "a in string", "createDate": {"$date": "2019-03-23T10:24:36.542Z"}, "translation": "a is b"}]}' with request id 9 to database mentor on connection [connectionId{localValue:2, serverValue:2}] to server localhost:27017
+12:24:36.703 [Test worker] DEBUG org.mongodb.driver.protocol.command - Execution of command with request id 9 completed successfully in 141.71 ms on connection [connectionId{localValue:2, serverValue:2}] to server localhost:27017
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

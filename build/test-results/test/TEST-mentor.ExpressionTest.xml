@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mentor.ExpressionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-03-23T10:24:36" hostname="Romans-MacBook-Pro.local" time="0.009">
+  <properties/>
+  <testcase name="hashesShouldDiffers()" classname="mentor.ExpressionTest" time="0.005"/>
+  <testcase name="hashGenerated()" classname="mentor.ExpressionTest" time="0.002"/>
+  <testcase name="hashCreated()" classname="mentor.ExpressionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
