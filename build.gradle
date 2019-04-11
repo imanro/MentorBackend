@@ -13,16 +13,9 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
 // apply plugin: 'application'
-
-bootJar {
-    baseName = 'gs-rest-service'
-    version =  '0.1.0'
-}
-
-repositories {
-    mavenCentral()
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -38,24 +31,43 @@ dependencies {
 
     testCompile('org.hamcrest:hamcrest-library:1.3')
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.0')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+bootWar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+    archiveName = 'mentor.war'
+}
+
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
 }
 
 // mainClassName = 'mentor.App'
 
-test {
-    useJUnitPlatform()
-	testLogging {
-	events "passed", "skipped", "failed"
-	showStandardStreams = true
-    }
-}
 
-task(runSimple, dependsOn: 'classes', type: JavaExec) {
+task(runImporter, dependsOn: 'classes', type: JavaExec) {
     main = 'mentor.App'
     classpath = sourceSets.main.runtimeClasspath
 //    args 'mrhaki'
 //    systemProperty 'simple.message', 'Hello '
 }
+
 
 /*
 task wrapper(type: Wrapper) {

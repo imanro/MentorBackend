@@ -17,6 +17,10 @@ public class Expression {
 
     private Date createDate;
 
+    private String srcLang;
+
+    private String trgLang;
+
     public Expression() {
         this.setCreateDate(new Date());
     }
@@ -61,6 +65,22 @@ public class Expression {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getSrcLang() {
+        return srcLang;
+    }
+
+    public void setSrcLang(String srcLang) {
+        this.srcLang = srcLang;
+    }
+
+    public String getTrgLang() {
+        return trgLang;
+    }
+
+    public void setTrgLang(String trgLang) {
+        this.trgLang = trgLang;
     }
 
     public void createHash() {

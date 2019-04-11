@@ -6,7 +6,10 @@ import mentor.mailimport.mailbox.*;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class Importer {
@@ -19,6 +22,9 @@ public class Importer {
         String messageContents = importLastMessage(mailBox, needleSubject);
 
         if (messageContents != null) {
+
+            saveMessage(messageContents);
+
             MessageParser parser = getMessageParser();
             List<String> lines = parser.extractLines(messageContents);
             System.out.println("We have found " + lines.size() + " of lines");
@@ -57,7 +63,6 @@ public class Importer {
 
         if (needle != null) {
             String contents = mailBox.getMessageContentsAsString(needle);
-            System.out.println(contents);
             return contents;
 
         } else {
@@ -87,5 +92,23 @@ public class Importer {
         repository.initClient();
         repository.initDatabase("mentor");
         return repository;
+    }
+
+    private void saveMessage(String contents) {
+        PrintStream out;
+
+        System.out.println("attempt to save our message");
+
+        try {
+            out = new PrintStream("/tmp/message_contents.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("output in null");
+            out = null;
+        }
+
+        if (out != null) {
+            out.println(contents);
+            out.close();
+        }
     }
 }

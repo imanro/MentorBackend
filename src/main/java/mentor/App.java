@@ -5,7 +5,9 @@ import mentor.mailimport.mailbox.*;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 
 public class App {
@@ -29,18 +31,29 @@ public class App {
         }
 
         if (messageContents.length() > 0) {
+
+            saveMessage(messageContents);
+
             MessageParser parser = getMessageParser();
             List<String> lines = parser.extractLines(messageContents);
             System.out.println("We have found " + lines.size() + " of lines");
             List<Expression> expressions = parser.parseLines(lines);
             System.out.println("We have found " + expressions.size() + " of expressions");
 
-            // save expressions in database
-            ExpressionRepository repository = getExpressionRepository();
-            System.out.println("Truncating repository (need to be changed)");
-            repository.drop();
-            for(int i = 0; i < expressions.size(); i++) {
-                repository.save(expressions.get(i));
+
+
+            if (lines.size() > 0) {
+                // save expressions in database
+                ExpressionRepository repository = getExpressionRepository();
+                System.out.println("Truncating repository (need to be changed)");
+                repository.drop();
+                for (int i = 0; i < expressions.size(); i++) {
+                    repository.save(expressions.get(i));
+                }
+            } else {
+                if (expressions.size() == 0) {
+                    System.out.println("Perhaps you have export your Phrasebook in condensed format");
+                }
             }
 
         } else {
@@ -66,13 +79,10 @@ public class App {
             throw new RuntimeException(e);
         }
 
-        System.out.println(selected.length);
-
         Message needle = mailBox.getLatestMessage(selected);
 
         if (needle != null) {
             String contents = mailBox.getMessageContentsAsString(needle);
-            System.out.println(contents);
             return contents;
 
         } else {
@@ -102,5 +112,23 @@ public class App {
         repository.initClient();
         repository.initDatabase("mentor");
         return repository;
+    }
+
+    private static void saveMessage(String contents) {
+        PrintStream out;
+
+        System.out.println("attempt to save our message");
+
+        try {
+            out = new PrintStream("/tmp/message_contents.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("output in null");
+            out = null;
+        }
+
+        if (out != null) {
+            out.println(contents);
+            out.close();
+        }
     }
 }

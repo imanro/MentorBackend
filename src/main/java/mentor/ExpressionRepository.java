@@ -1,14 +1,11 @@
 package mentor;
 
 
-import com.mongodb.Block;
-import com.mongodb.DuplicateKeyException;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.*;
-import org.apache.commons.lang3.ArrayUtils;
 import org.bson.Document;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +14,15 @@ public class ExpressionRepository {
     private MongoClient client;
     private MongoDatabase database;
 
-    public List<Expression> findAll(int limit) {
+    public List<Expression> findAll(String srcLang, String trgLang, int limit, int offset) {
         MongoCollection<Document> collection = getCollection();
-        List<Expression> items = new ArrayList<Expression>();
-        MongoCursor<Document> cursor = collection.find().limit(limit).iterator();
+        List<Expression> items = new ArrayList<>();
+
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.put("srcLang", srcLang);
+        searchQuery.put("trgLang", trgLang);
+
+        MongoCursor<Document> cursor = collection.find(searchQuery).limit(limit).skip(offset).sort(new BasicDBObject("createDate", 1)).iterator();
 
         try {
             while (cursor.hasNext()) {
@@ -79,6 +81,8 @@ public class ExpressionRepository {
         return new Document("_id", expression.getHash())
                 .append("hash", expression.getHash())
                 .append("term", expression.getTerm())
+                .append("srcLang", expression.getSrcLang())
+                .append("trgLang", expression.getTrgLang())
                 .append("example", expression.getExample())
                 .append("createDate", expression.getCreateDate())
                 .append("translation", expression.getTranslation());
@@ -91,6 +95,8 @@ public class ExpressionRepository {
         item.setTranslation(document.getString("translation"));
         item.setHash(document.getString("hash"));
         item.setCreateDate(document.getDate("createDate"));
+        item.setSrcLang(document.getString("srcLang"));
+        item.setTrgLang(document.getString("trgLang"));
         return item;
     }
 

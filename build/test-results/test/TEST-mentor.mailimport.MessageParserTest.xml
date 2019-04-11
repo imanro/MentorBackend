@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mentor.mailimport.MessageParserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2019-03-28T15:40:54" hostname="Romans-MacBook-Pro.local" time="0.149">
+<testsuite name="mentor.mailimport.MessageParserTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2019-04-10T21:08:17" hostname="Romans-MacBook-Pro.local" time="0.129">
   <properties/>
-  <testcase name="newlinesCleared()" classname="mentor.mailimport.MessageParserTest" time="0.117"/>
-  <testcase name="expressionListCreated()" classname="mentor.mailimport.MessageParserTest" time="0.004"/>
-  <testcase name="textNormalized()" classname="mentor.mailimport.MessageParserTest" time="0.002"/>
+  <testcase name="languagesSet()" classname="mentor.mailimport.MessageParserTest" time="0.09"/>
+  <testcase name="newlinesCleared()" classname="mentor.mailimport.MessageParserTest" time="0.005"/>
+  <testcase name="languagesParsed()" classname="mentor.mailimport.MessageParserTest" time="0.0"/>
+  <testcase name="expressionListCreated()" classname="mentor.mailimport.MessageParserTest" time="0.003"/>
+  <testcase name="textNormalized()" classname="mentor.mailimport.MessageParserTest" time="0.001"/>
   <testcase name="expressionsCreatedValid()" classname="mentor.mailimport.MessageParserTest" time="0.003"/>
-  <testcase name="highlightTagsCreated()" classname="mentor.mailimport.MessageParserTest" time="0.0"/>
-  <testcase name="highlightsLeft()" classname="mentor.mailimport.MessageParserTest" time="0.001"/>
-  <testcase name="attachmentExtracted()" classname="mentor.mailimport.MessageParserTest" time="0.013"/>
-  <testcase name="linesExtracted()" classname="mentor.mailimport.MessageParserTest" time="0.002"/>
+  <testcase name="highlightTagsCreated()" classname="mentor.mailimport.MessageParserTest" time="0.001"/>
+  <testcase name="highlightsLeft()" classname="mentor.mailimport.MessageParserTest" time="0.002"/>
+  <testcase name="attachmentExtracted()" classname="mentor.mailimport.MessageParserTest" time="0.012"/>
+  <testcase name="linesExtracted()" classname="mentor.mailimport.MessageParserTest" time="0.001"/>
   <testcase name="decoded()" classname="mentor.mailimport.MessageParserTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

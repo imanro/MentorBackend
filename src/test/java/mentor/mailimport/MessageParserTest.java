@@ -54,7 +54,7 @@ class MessageParserTest {
 
         List<String> lines = this.getContentLines();
         List<Expression> expressions = parser.parseLines(lines);
-        assertThat(expressions.size(), is(1));
+        assertThat(expressions.size(), is(2));
     }
 
     @Test
@@ -113,8 +113,29 @@ class MessageParserTest {
         assertThat(result, containsString("<strong>"));
     }
 
+    @Test
+    void languagesParsed() {
+        String langSpec = "   Russian &gt; English    ";
+        String[] result = parser.parseLanguages(langSpec);
+        assertThat(result.length, is(2));
+        assertThat(result[0], is("russian"));
+        assertThat(result[1], is("english"));
+    }
+
+    @Test
+    void languagesSet() {
+        List<String> lines = this.getContentLines();
+        List<Expression> expressions = parser.parseLines(lines);
+        assertThat(expressions.size(), is(2));
+        assertThat(expressions.get(0).getSrcLang(), is("english"));
+        assertThat(expressions.get(0).getTrgLang(), is("russian"));
+        assertThat(expressions.get(1).getSrcLang(), is("french"));
+        assertThat(expressions.get(1).getTrgLang(), is("russian"));
+    }
+
     private List<String> getContentLines() {
         List<String> lines = new ArrayList<>();
+        lines.add("<td bgcolor=\"#f2f2f2\"> English &gt; Russian </td>");
         lines.add("<td>compelled</td>");
         lines.add("<td><span " +
                 "style=\"font-family:  Calibri; font-size: 14.000000; color:" +
@@ -127,6 +148,13 @@ class MessageParserTest {
                 "<b><span style=\"background-color:#FAFADC;\">вынуждены</span></b> " +
                 "в силу нерушимого вердикта технологии жить теперь в едином" +
                 "мире.</span><hr> |  | </td>");
+
+        lines.add("<tr><td bgcolor=\"#f2f2f2\"> French &gt; Russian </td>");
+        lines.add("<td>accuser</td>");
+        lines.add("<td><span style=\"font-family:  Calibri; " +
+                "font-size: 14.000000; color: #2B6FAD; text-align: justify;\">De ce dont vous venez nous " +
+                "<span style=\"background-color:#FAFADC; color: #0C0054;\">accuser</span>.</span> <br>⤷  " +
+                "<span style=\"font-family:  Calibri; font-size: 13; color: #0C0054; text-align: justify;\">За всё, в чём вы пришли <b><span style=\"background-color:#FAFADC;\">обвинять</span></b> нас.</span></td>");
 
         return lines;
     }

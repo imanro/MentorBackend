@@ -6,10 +6,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Base64;
 import javax.mail.internet.MimeUtility;
 import java.io.ByteArrayInputStream;
-import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.io.IOException;
 import javax.mail.MessagingException;
@@ -76,23 +74,37 @@ public class MessageParser {
         return found;
     }
 
-    public List<Expression> parseLines(List<String> lines) throws RuntimeException {
+    public List<Expression> parseLines(List<String> lines) throws RuntimeException, MessageParserException {
         List<Expression> expressions = new ArrayList<Expression>();
 
-        String patternBr = "<br>";
-        Pattern reBr = Pattern.compile(patternBr);
+        String patternExample = "<br>";
+        String patternLang = "<td bgcolor=\"#f2f2f2\">(.+?)</td>";
+
+        Pattern reExample = Pattern.compile(patternExample);
         Pattern reTerm = Pattern.compile("<td>(.+?)</td>");
+        Pattern reLang = Pattern.compile(patternLang);
+
+        String srcLang, trgLang;
+        srcLang = trgLang = null;
+
         Expression exp = new Expression();
 
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            Matcher mBr = reBr.matcher(line);
 
-            if (mBr.find()) {
+            Matcher mBr = reExample.matcher(line);
+            Matcher mLang = reLang.matcher(line);
+
+            if (mLang.find()) {
+                String[] languages = this.parseLanguages(mLang.group(1));
+                srcLang = languages[0];
+                trgLang = languages[1];
+
+            } else if (mBr.find()) {
                 if (exp.getTerm() != null) {
                     // continue to fill
 
-                    String[] parts = line.split(patternBr);
+                    String[] parts = line.split(patternExample);
 
                     if (parts.length == 2) {
 
@@ -105,15 +117,16 @@ public class MessageParser {
 
                         // split by that br
                         expressions.add(exp);
-
                     }
-
                 }
 
             } else {
                 Matcher mTerm = reTerm.matcher(line);
+                exp = new Expression();
+                exp.setSrcLang(srcLang);
+                exp.setTrgLang(trgLang);
+
                 if (mTerm.find()) {
-                    exp = new Expression();
                     exp.setTerm(mTerm.group(1));
                 }
             }
@@ -142,6 +155,19 @@ public class MessageParser {
         result = result.replaceAll("⤷", "");
         result = result.replaceAll("\\|\\s+\\|", "");
         return result.trim();
+    }
+
+    public String[] parseLanguages(String langString) throws MessageParserException {
+        String[] parts = langString.split("&gt;");
+
+        if (parts.length == 2) {
+            parts[0] = parts[0].trim().toLowerCase();
+            parts[1] = parts[1].trim().toLowerCase();
+            return parts;
+
+        } else {
+            throw new MessageParserException("Lang specification is invalid");
+        }
     }
 
 }
