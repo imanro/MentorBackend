@@ -110,7 +110,7 @@ class MailBoxTest {
 
     private void initRealMailBox() {
         mailBox = new MailBox();
-        Source source = new SourceImap();
+        Source source = new SourceMyImap();
         mailBox.setSource(source);
         try {
             mailBox.getSource().init();

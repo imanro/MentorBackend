@@ -94,7 +94,7 @@ public class ImporterApplication {
 
     private static MailBox getMailBox() {
         MailBox mailBox = new MailBox();
-        Source source = new SourceImap();
+        Source source = new SourceMyImap();
         mailBox.setSource(source);
         try {
             mailBox.getSource().init();
