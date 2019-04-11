@@ -12,6 +12,8 @@ buildscript {
 plugins {
     id 'java'
     id 'idea'
+    // id 'org.springframework.boot' version '2.1.4.RELEASE'
+    // id "io.spring.dependency-management" version "1.0.7.RELEASE"
     id 'org.springframework.boot'
     id "io.spring.dependency-management"
     id 'war'
@@ -43,14 +45,12 @@ dependencies {
 }
 
 
-
 bootJar {
-    baseName = 'mentor-rest-service'
+    baseName = 'gs-spring-boot'
     version =  '0.1.0'
 }
 
 bootWar {
-    baseName = 'mentor-rest-service'
     version =  '0.1.0'
     archiveName = 'mentor.war'
 }
