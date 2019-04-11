@@ -23,7 +23,7 @@ import java.io.FileReader;
 // import com.fasterxml.jackson.annotation.JacksonAnnotation;
 
 
-public class SourceMyImap implements Source {
+public class SourceImap implements Source {
 
     private Folder folder;
 
