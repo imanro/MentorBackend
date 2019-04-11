@@ -20,7 +20,7 @@ public class App {
         System.out.println("Hello, I'm Mentor importer!");
         MailBox mailBox = getMailBox();
 
-        String messageContents = "";
+        String messageContents;
 
         try {
             messageContents = importLastMessage(mailBox, needleSubject);
@@ -30,7 +30,7 @@ public class App {
             // System.exit(0);
         }
 
-        if (messageContents.length() > 0) {
+        if (messageContents != null && messageContents.length() > 0) {
 
             saveMessage(messageContents);
 
@@ -57,7 +57,7 @@ public class App {
             }
 
         } else {
-            System.out.println("Obviously, there is no such message");
+            System.out.println("Obviously, the import has been sunk in the mailbox");
         }
     }
 

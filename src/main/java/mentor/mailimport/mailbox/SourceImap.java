@@ -25,7 +25,7 @@ public class SourceImap implements Source {
             // Message[] messages = folder.search(new FlagTerm(new Flags(Flag.RECENT), false));
 
             int totalCount = folder.getMessageCount();
-            Message[] messages = folder.getMessages(totalCount - 20, totalCount);
+            Message[] messages = folder.getMessages(totalCount - 50, totalCount);
             ArrayUtils.reverse(messages);
 
             /*
