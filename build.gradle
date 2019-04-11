@@ -3,74 +3,35 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
 
-// apply plugin: 'application'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.jsoup:jsoup:1.11.3")
-    compile("commons-codec:commons-codec:1.5")
-    compile("javax.mail:mail:1.4.1")
-    compile("org.apache.commons:commons-lang3:3.0")
-    compile("org.mongodb:mongo-java-driver:3.10.1")
-    testCompile('org.junit.jupiter:junit-jupiter-api:5.4.0')
+task(buildWar, dependsOn: ":mentor-api:bootWar") {
 
-    testCompile('org.hamcrest:hamcrest-library:1.3')
-    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.0')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
 
-repositories {
-    mavenCentral()
-}
+task(bootApi, dependsOn: ":mentor-api:bootRun") {
 
-bootJar {
-    baseName = 'gs-rest-service'
-    version =  '0.1.0'
-}
-
-bootWar {
-    baseName = 'gs-rest-service'
-    version =  '0.1.0'
-    archiveName = 'mentor.war'
 }
 
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        showStandardStreams = true
-    }
-}
+task(runImport, dependsOn: ":mentor-importer:run") {
 
-// mainClassName = 'mentor.App'
-
-
-task(runImporter, dependsOn: 'classes', type: JavaExec) {
-    main = 'mentor.App'
-    classpath = sourceSets.main.runtimeClasspath
-//    args 'mrhaki'
-//    systemProperty 'simple.message', 'Hello '
 }
 
 
-/*
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
-}
-*/
+

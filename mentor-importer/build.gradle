@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
+    }
+}
+
+// The Application plugin allows to resolve dependencies for plain application, just as io.spring.dependency-management does for Spring, I think.
+// It requires to mainClassName was defined in build.gradle
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot'
+    id "io.spring.dependency-management"
+}
+
+version '0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":mentor-common")
+
+    compile("org.mongodb:mongo-java-driver:3.10.1")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.jsoup:jsoup:1.11.3")
+    compile("javax.mail:mail:1.4.1")
+    compile("org.apache.commons:commons-lang3:3.0")
+
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.3.2')
+    testCompile('org.hamcrest:hamcrest-library:1.3')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.2')
+}
+
+mainClassName = 'mentor.ImporterApplication'
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
