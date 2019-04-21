@@ -1,12 +1,14 @@
 package mentor.expression.api;
 
-import mentor.expression.ExpressionRepository;
 import mentor.expression.Expression;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import mentor.expression.ExpressionRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -14,21 +16,20 @@ import java.util.List;
 @RequestMapping("/expression")
 public class ExpressionController {
 
+    private final ExpressionRepository expressionRepository;
+
+    public ExpressionController(ExpressionRepository expressionRepository) {
+        this.expressionRepository = expressionRepository;
+    }
+
     @GetMapping("")
     public List<Expression> getExpressions(@RequestParam(name = "srcLang", defaultValue = "english") String srcLang,
                                            @RequestParam(name = "trgLang", defaultValue = "russian") String trgLang,
-                                           @RequestParam(name = "limit", defaultValue = "10") int limit,
-                                           @RequestParam(name = "offset", defaultValue = "0") int offset) {
+                                           @RequestParam(name = "page", defaultValue = "0") int page,
+                                           @RequestParam(name = "size", defaultValue = "10") int size) {
 
         System.out.println("Called");
-        return getExpressionRepository().findAll(srcLang, trgLang, limit, offset);
-    }
 
-    private static ExpressionRepository getExpressionRepository() {
-        ExpressionRepository repository = new ExpressionRepository();
-        repository.initClient();
-        repository.initDatabase("mentor");
-        return repository;
+        return this.expressionRepository.findAllBySrcLangAndTrgLang(srcLang, trgLang, PageRequest.of(page, size, Sort.by("createDate").descending()));
     }
-
 }

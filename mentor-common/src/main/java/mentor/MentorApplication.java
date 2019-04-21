@@ -1,9 +1,9 @@
 package mentor;
 
-import mentor.expression.ExpressionRepository;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class MentorApplication {
     public static void main(String[] args) {
-        // ExpressionRepository repository = new ExpressionRepository();
     }
 }

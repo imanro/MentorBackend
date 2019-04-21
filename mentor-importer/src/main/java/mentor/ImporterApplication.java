@@ -7,14 +7,36 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
+
 import mentor.expression.Expression;
 import mentor.expression.ExpressionRepository;
 
 import mentor.importer.MessageParser;
 import mentor.importer.mailbox.*;
 
-public class ImporterApplication {
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.context.annotation.ComponentScan;
+
+// @ComponentScan("mentor.expression")
+@SpringBootApplication(scanBasePackages = "mentor")
+// @SpringBootApplication
+public class ImporterApplication implements CommandLineRunner {
+
+    @Autowired
+    private ExpressionRepository repository;
+
+    @Autowired
+    private MessageParser parser;
+
     public static void main(String[] args) {
+        SpringApplication.run(ImporterApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
         // ExpressionRepository repository = new ExpressionRepository();
         // create parser,
 
@@ -37,7 +59,6 @@ public class ImporterApplication {
 
             saveMessage(messageContents);
 
-            MessageParser parser = getMessageParser();
             List<String> lines = parser.extractLines(messageContents);
             System.out.println("We have found " + lines.size() + " of lines");
             List<Expression> expressions = parser.parseLines(lines);
@@ -46,9 +67,9 @@ public class ImporterApplication {
 
             if (lines.size() > 0) {
                 // save expressions in database
-                ExpressionRepository repository = getExpressionRepository();
                 System.out.println("Truncating repository (need to be changed)");
-                repository.drop();
+                repository.deleteAll();
+
                 for (int i = 0; i < expressions.size(); i++) {
                     repository.save(expressions.get(i));
                 }
@@ -103,17 +124,6 @@ public class ImporterApplication {
         }
 
         return mailBox;
-    }
-
-    private static MessageParser getMessageParser() {
-        return new MessageParser();
-    }
-
-    private static ExpressionRepository getExpressionRepository() {
-        ExpressionRepository repository = new ExpressionRepository();
-        repository.initClient();
-        repository.initDatabase("mentor");
-        return repository;
     }
 
     private static void saveMessage(String contents) {

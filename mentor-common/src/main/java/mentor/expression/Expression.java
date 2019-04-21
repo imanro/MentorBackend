@@ -1,21 +1,27 @@
 package mentor.expression;
 
 import javax.xml.bind.DatatypeConverter;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import org.springframework.data.annotation.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Expression {
+
+    @Id
+    private String hash;
+
+    @CreatedDate
+    private Date createDate;
 
     private String term;
 
     private String example;
 
     private String translation;
-
-    private String hash;
-
-    private Date createDate;
 
     private String srcLang;
 

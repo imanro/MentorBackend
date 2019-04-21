@@ -37,6 +37,7 @@ dependencies {
     compile("javax.mail:mail:1.4.1")
     compile("org.apache.commons:commons-lang3:3.0")
     compile("org.mongodb:mongo-java-driver:3.10.1")
+    compile("com.fasterxml.jackson.core:jackson-core:2.9.8")
 
     testCompile('org.junit.jupiter:junit-jupiter-api:5.3.2')
     testCompile('org.hamcrest:hamcrest-library:1.3')

@@ -1,6 +1,6 @@
 package mentor.importer;
 
-import mentor.expression.Expression;
+import mentor.expression.*;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MessageParser {
 
     public MessageParser() {
