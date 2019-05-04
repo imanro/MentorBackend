@@ -9,7 +9,9 @@ buildscript {
     }
 }
 
-// Version is required for spring plugins!!! (At least on linux int won't compile otherwise)
+// settings.gradle is required for multiproject builds; Check whether it was committed
+
+// Version is required for spring plugins for root project only!!! In child project they have to be skipped (At least on linux int won't compile otherwise)
 plugins {
     id 'java'
     id 'eclipse'
