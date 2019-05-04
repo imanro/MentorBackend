@@ -16,8 +16,8 @@ plugins {
     id 'java'
     id 'idea'
     id 'application'
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
+    id 'org.springframework.boot' version "2.1.4.RELEASE"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
     id 'net.ltgt.apt' version '0.21'
     id 'net.ltgt.apt-idea' version '0.21'
 }
