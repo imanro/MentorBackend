@@ -1,0 +1,6 @@
+rootProject.name = 'mentor'
+
+include 'mentor-common'
+include 'mentor-api'
+include 'mentor-importer'
+
