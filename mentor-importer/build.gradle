@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
     }
 }
@@ -13,7 +13,7 @@ buildscript {
 plugins {
     id 'java'
     id 'application'
-    id 'org.springframework.boot'
+    id 'org.springframework.boot' version "2.1.4.RELEASE"
     id "io.spring.dependency-management"
 }
 
