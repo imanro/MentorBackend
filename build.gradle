@@ -9,6 +9,7 @@ buildscript {
     }
 }
 
+// Version is required for spring plugins!!! (At least on linux int won't compile otherwise)
 plugins {
     id 'java'
     id 'eclipse'

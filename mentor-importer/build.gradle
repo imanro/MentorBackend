@@ -10,11 +10,13 @@ buildscript {
 
 // The Application plugin allows to resolve dependencies for plain application, just as io.spring.dependency-management does for Spring, I think.
 // It requires to mainClassName was defined in build.gradle
+
+// Version is required for spring plugins!!!
 plugins {
     id 'java'
     id 'application'
     id 'org.springframework.boot' version "2.1.4.RELEASE"
-    id "io.spring.dependency-management"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
 }
 
 version '0.1'
