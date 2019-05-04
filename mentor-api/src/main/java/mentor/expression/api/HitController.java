@@ -48,7 +48,7 @@ public class HitController {
 
         // saving hit
         Hit hit = new Hit();
-        hit.setExpression(exp);
+        hit.setExpressionHash(exp.getHash());
         this.hitRepository.save(hit);
 
         return Collections.singletonMap("result", "Ok");

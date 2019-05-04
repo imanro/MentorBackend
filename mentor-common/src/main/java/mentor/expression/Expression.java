@@ -27,6 +27,9 @@ public class Expression {
 
     private String trgLang;
 
+    // aggregated field
+    private int hitsAmount;
+
     public Expression() {
         this.setCreateDate(new Date());
     }
@@ -87,6 +90,16 @@ public class Expression {
 
     public void setTrgLang(String trgLang) {
         this.trgLang = trgLang;
+    }
+
+
+    public int getHitsAmount() {
+        return hitsAmount;
+    }
+
+
+    public void setHitsAmount(Integer hitsAmount) {
+        this.hitsAmount = hitsAmount;
     }
 
     public void createHash() {

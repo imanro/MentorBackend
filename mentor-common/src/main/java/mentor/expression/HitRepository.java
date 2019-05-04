@@ -7,6 +7,5 @@ package mentor.expression;
         import org.springframework.data.mongodb.repository.Query;
 
 public interface HitRepository extends MongoRepository<Hit, String> {
-    @Query(value="{ 'expression.$id' : ?0 }")
-    public List<Hit> findByExpressionHash(String hash);
+    List<Hit> findAllByExpressionHash(String expressionHash);
 }

@@ -43,14 +43,14 @@ class HitRepositoryTest {
         expressionRepository.save(exp);
 
         Hit hit = new Hit();
-        hit.setExpression(exp);
+        hit.setExpressionHash(exp.getHash());
 
         hitRepository.save(hit);
 
         List<Hit> collection = hitRepository.findAll();
         assertThat("The collection size is wrong", collection.size(), is(1));
         Hit found = collection.get(0);
-        assertThat("The referenced document is not the one we expect", found.getExpression().getHash(), is(checkHash));
+        assertThat("The referenced document is not the one we expect", found.getExpressionHash(), is(checkHash));
     }
 
     @Test
@@ -67,18 +67,20 @@ class HitRepositoryTest {
         expressionRepository.save(exp2);
 
         Hit hit1 = new Hit();
-        hit1.setExpression(exp1);
+        hit1.setExpressionHash(exp1.getHash());
         hitRepository.save(hit1);
 
 
-
         Hit hit2 = new Hit();
-        hit2.setExpression(exp2);
+        hit2.setExpressionHash(exp2.getHash());
         hitRepository.save(hit2);
 
-        List<Hit> collection = hitRepository.findByExpressionHash(checkHash);
+        List<Hit> collection = hitRepository.findAllByExpressionHash(checkHash);
         assertThat("The collection size is wrong", collection.size(), is(1));
         Hit found = collection.get(0);
-        assertThat("The referenced document is not the one we expect", found.getExpression().getHash(), is(checkHash));
+
+        System.out.println("Searching for " + checkHash);
+        System.out.println("Got " + found.getExpressionHash());
+        assertThat("The referenced document is not the one we expect", found.getExpressionHash(), is(checkHash));
     }
 }

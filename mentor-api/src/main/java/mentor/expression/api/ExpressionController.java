@@ -25,11 +25,11 @@ public class ExpressionController {
     @GetMapping("")
     public List<Expression> getExpressions(@RequestParam(name = "srcLang", defaultValue = "english") String srcLang,
                                            @RequestParam(name = "trgLang", defaultValue = "russian") String trgLang,
+                                           @RequestParam(name = "hitsAmountLte", defaultValue = "10") int hitsAmountLte,
                                            @RequestParam(name = "page", defaultValue = "0") int page,
                                            @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        System.out.println("Called");
-
-        return this.expressionRepository.findAllBySrcLangAndTrgLang(srcLang, trgLang, PageRequest.of(page, size, Sort.by("createDate").descending()));
+        // return this.expressionRepository.findAllBySrcLangAndTrgLang(srcLang, trgLang, PageRequest.of(page, size, Sort.by("createDate").descending()));
+        return this.expressionRepository.findAllBySrcLangAndTrgLangWithHitsLte(srcLang, trgLang, hitsAmountLte, PageRequest.of(page, size));
     }
 }

@@ -8,8 +8,10 @@ import java.util.Date;
 
 public class Hit {
 
-    @DBRef
-    private Expression expression;
+    // @DBRef
+    // private Expression expression;
+
+    private String expressionHash;
 
     @CreatedDate
     private Date createDate;
@@ -18,12 +20,12 @@ public class Hit {
         this.setCreateDate(new Date());
     }
 
-    public Expression getExpression() {
-        return expression;
+    public String getExpressionHash() {
+        return this.expressionHash;
     }
 
-    public void setExpression(Expression expression) {
-        this.expression = expression;
+    public void setExpressionHash(String hash) {
+        this.expressionHash = hash;
     }
 
     public Date getCreateDate() {
