@@ -56,6 +56,8 @@ public class ExpressionRepositoryCustomImpl implements ExpressionRepositoryCusto
     private List<AggregationOperation> createBaseAggregationList(String srcLang, String trgLang, Integer hitsAmount) {
         List<AggregationOperation> list = new ArrayList<>();
         list.add(Aggregation.match(Criteria.where("srcLang").is(srcLang).and("trgLang").is(trgLang)));
+        // !
+        // list.add(Aggregation.sort(Sort.Direction.DESC, "createDate"));
         list.add(Aggregation.lookup("hit", "_id", "expressionHash", "hits"));
 
         ConditionalOperators.Cond condOperation = ConditionalOperators.when(
@@ -65,6 +67,7 @@ public class ExpressionRepositoryCustomImpl implements ExpressionRepositoryCusto
 
         list.add(Aggregation.project("hash", "createDate", "term", "example", "translation", "srcLang", "trgLang").and(condOperation).as("hitsAmount"));
         list.add(Aggregation.match(Criteria.where("hitsAmount").lte(hitsAmount)));
+        // list.add(Aggregation.sort(Sort.Direction.DESC, "createDate"));
         // we filter documents that has more than x hits, but then put oftener showed into top
         list.add(Aggregation.sort(Sort.Direction.DESC, "hitsAmount").and(Sort.Direction.DESC, "createDate"));
         // list.add(Aggregation.sort(Sort.Direction.DESC, "hitsAmount"));
